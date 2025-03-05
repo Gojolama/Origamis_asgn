@@ -22,7 +22,7 @@ if st.sidebar.button("Process URLs"):
 query = st.text_input("Ask a question:")
 if query:
     answer, sources = agent.run("Retrieve Answer", query)
-    
+
     st.header("Answer")
     st.write(answer)
 

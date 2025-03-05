@@ -1,7 +1,8 @@
 import os
 import pickle
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings import OpenAIEmbeddings
+# from langchain.embeddings import OpenAIEmbeddings # Removed
+from langchain_google_genai import GoogleGenerativeAIEmbeddings  # Added
 from langchain.vectorstores import FAISS
 
 FILE_PATH = "faiss_store.pkl"
@@ -14,7 +15,7 @@ def index_documents(docs):
     )
     chunks = text_splitter.split_text(docs)
 
-    embeddings = OpenAIEmbeddings()
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")  # Using Vertex AI Embeddings
     vectorstore = FAISS.from_texts(chunks, embeddings)
 
     with open(FILE_PATH, "wb") as f:

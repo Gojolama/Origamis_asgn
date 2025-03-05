@@ -2,10 +2,12 @@ import os
 import pickle
 from langchain.vectorstores import FAISS
 from langchain.chains import RetrievalQAWithSourcesChain
-from langchain import OpenAI
-
+# from langchain import OpenAI # Removed
+from langchain_google_genai import GoogleGenerativeAI  # Added
+APIKEY = ""
 FILE_PATH = "faiss_store.pkl"
-llm = OpenAI(temperature=0.7, max_tokens=500)
+# llm = OpenAI(temperature=0.7, max_tokens=500) # Removed
+llm = GoogleGenerativeAI(model="gemini-1.5-pro", google_api_key=APIKEY)  # Added
 
 def retrieve_answer(query):
     """Retrieves an answer from indexed documents based on the query."""

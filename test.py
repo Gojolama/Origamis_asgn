@@ -1,15 +1,11 @@
-from openai import OpenAI
+from langchain_google_genai import GoogleGenerativeAI
+import os
 
-client = OpenAI(
-  api_key="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"
+api_key = "AIzaSyCfmvRKpn2mn0hTj2-O0h8MWA4uxcNzm0U"
+
+llm = GoogleGenerativeAI(model="gemini-1.5-pro", google_api_key=api_key)
+print(
+    llm.invoke(
+        "What are some of the pros and cons of Python as a programming language?"
+    )
 )
-
-completion = client.chat.completions.create(
-  model="gpt-4o-mini",
-  store=True,
-  messages=[
-    {"role": "user", "content": "write a haiku about ai"}
-  ]
-)
-
-print(completion.choices[0].message)

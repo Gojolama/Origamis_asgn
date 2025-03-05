@@ -1,5 +1,5 @@
 import google.generativeai as genai
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_google_genai import GoogleGenerativeAI
 from langchain.agents import initialize_agent, AgentType
 from langchain.tools import Tool
 from src.scraper import scrape_website
@@ -8,16 +8,17 @@ from src.retriever import retrieve_answer
 import os
 
 
-APIKEY = "AIzaSyCL_ub6HPpyqt4hCcGyKf8SnwBcR6mMmyI"
+APIKEY = ""
+print(f"API Key = {APIKEY}")
 # Securely configure API Key (Use AI Studio API Key)
-genai.configure(api_key=os.getenv(APIKEY))
+genai.configure(api_key=APIKEY)
 
 # Correct AI Studio-based Gemini model for LangChain
-llm = ChatGoogleGenerativeAI(
-    model_name="gemini-1.5-flash",
+llm = GoogleGenerativeAI(
+    model="gemini-1.5-pro",
     google_api_key=APIKEY,
-    temperature=0.2,
-    exclude_defaults=True,
+    # temperature=0.2,
+    # exclude_defaults=True,
 )
 
 # Tools for the agent
